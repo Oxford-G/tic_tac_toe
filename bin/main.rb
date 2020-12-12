@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/BlockNesting
+
 puts "Welcome to Oxfordiho's TIC-TAC-TOE game"
 
 puts
@@ -18,15 +18,15 @@ game_system = true
 
 i = 0
 
-  puts
-  puts ' 1 2 3'
-  puts "-------------"
-  puts "| #{layout[0]} | #{layout[1]} | #{layout[2]} |"
-  puts "-------------"
-  puts "| #{layout[3]} | #{layout[4]} | #{layout[5]} |"
-  puts "-------------"
-  puts "| #{layout[6]} | #{layout[7]} | #{layout[8]} |"
-  puts "-------------"
+puts
+puts ' 1 2 3'
+puts '-------------'
+puts "| #{layout[0]} | #{layout[1]} | #{layout[2]} |"
+puts '-------------'
+puts "| #{layout[3]} | #{layout[4]} | #{layout[5]} |"
+puts '-------------'
+puts "| #{layout[6]} | #{layout[7]} | #{layout[8]} |"
+puts '-------------'
 
 while game_system
   if i != 9
@@ -49,7 +49,7 @@ while game_system
     game_system = false
   elsif input == 'o'
     puts
-        puts <<-LAYOUT
+    puts <<-LAYOUT
       | X | O | X |
       | X | O | o |
       | o | x | X |
@@ -59,7 +59,6 @@ while game_system
     game_system = false
   else
     puts 'invalid move'
-    # game_system = false
+    puts
   end
 end
-# rubocop:enable Metrics/BlockNesting
