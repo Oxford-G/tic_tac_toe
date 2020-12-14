@@ -1,19 +1,11 @@
 #!/usr/bin/env ruby
+require_relative '../lib/board'
 require_relative '../lib/game'
 require_relative '../lib/player'
 
 game = Game.new
+board = Board.new
 name = ''
-def print_game(layout)
-  puts ' 1    2    3'
-  puts '-------------'
-  puts "| #{layout[0]} | #{layout[1]} | #{layout[2]} |"
-  puts '-------------'
-  puts "| #{layout[3]} | #{layout[4]} | #{layout[5]} |"
-  puts '-------------'
-  puts "| #{layout[6]} | #{layout[7]} | #{layout[8]} |"
-  puts '-------------'
-end
 
 def print_initial_message(game, player1, player2)
   game.current_player = game.move_num.odd? ? player1 : player2
@@ -24,7 +16,7 @@ end
 
 def game_flow(game, player1, player2)
   game.first_d = nil
-  print_game(game.layout)
+  board.print_game(game.layout)
   print_initial_message(game, player1, player2)
   input = gets.chomp
   puts '---------------------------'
@@ -59,4 +51,4 @@ name = gets.chomp while name.empty?
 player2 = Player.new(name, 'o')
 
 puts game_flow(game, player1, player2) until game.gameover
-print_game(game.layout)
+board.print_game(game.layout)
