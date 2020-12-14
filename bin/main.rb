@@ -1,64 +1,62 @@
 #!/usr/bin/env ruby
+require_relative '../lib/game'
+require_relative '../lib/player'
+
+game = Game.new
+name = ''
+def print_game(layout)
+  puts ' 1    2    3'
+  puts '-------------'
+  puts "| #{layout[0]} | #{layout[1]} | #{layout[2]} |"
+  puts '-------------'
+  puts "| #{layout[3]} | #{layout[4]} | #{layout[5]} |"
+  puts '-------------'
+  puts "| #{layout[6]} | #{layout[7]} | #{layout[8]} |"
+  puts '-------------'
+end
+
+def print_initial_message(game, player1, player2)
+  game.current_player = game.move_num.odd? ? player1 : player2
+  puts 'Note: Game is over when all squares are filled.'
+  puts "Round for #{game.current_player.name}"
+  puts 'Please enter a number (from 1 to 9) to play your move.'
+end
+
+def game_flow(game, player1, player2)
+  game.first_d = nil
+  print_game(game.layout)
+  print_initial_message(game, player1, player2)
+  input = gets.chomp
+  puts '---------------------------'
+  return 'Wrong value entered! Please try again!' unless game.input_valid?(input)
+
+  game.update_d(input)
+  return 'Wrong value entered! Please try again!' unless game.move_valid?
+
+  return 'This square is already filled! Please try again!' unless game.square_filled?
+
+  game.play_move
+  if game.game_won?
+    game.gameover = true
+    return "#{game.current_player.name} has won the game!"
+  end
+
+  return unless game.move_num > 9
+
+  game.gameover = true
+  "Game Over! It's a draw!"
+end
 
 puts "Welcome to Oxfordiho's TIC-TAC-TOE game"
 
-puts
+puts 'First Player please enter your name.'
+name = gets.chomp while name.empty?
+player1 = Player.new(name, 'x')
 
-players = []
+name = ''
+puts 'Second Player please enter your name.'
+name = gets.chomp while name.empty?
+player2 = Player.new(name, 'o')
 
-2.times do |i|
-  puts "Please enter the name of Player #{i + 1}."
-  players[i] = gets.chomp
-  puts "Welcome #{players[i]}"
-end
-
-layout = ['', '', '', '', '', '', '', '', '']
-
-game_system = true
-
-i = 0
-
-puts
-puts ' 1 2 3'
-puts '-------------'
-puts "| #{layout[0]} | #{layout[1]} | #{layout[2]} |"
-puts '-------------'
-puts "| #{layout[3]} | #{layout[4]} | #{layout[5]} |"
-puts '-------------'
-puts "| #{layout[6]} | #{layout[7]} | #{layout[8]} |"
-puts '-------------'
-
-while game_system
-  if i != 9
-    puts 'Note: Game is over when all squares are filled.'
-    puts "Round for #{players[i % 2]}"
-    puts 'Place your token (X or O) on positions 1-9 on the board'
-    input = gets.chomp
-  end
-
-  if input == 'x'
-    puts
-    puts <<-LAYOUT
-      | X | O | X |
-      | X | O | X |
-      | X | O | X |
-    LAYOUT
-    puts
-    puts 'valid move'
-    puts 'you won'
-    game_system = false
-  elsif input == 'o'
-    puts
-    puts <<-LAYOUT
-      | X | O | X |
-      | X | O | o |
-      | o | x | X |
-    LAYOUT
-    puts 'valid move'
-    puts 'you draw'
-    game_system = false
-  else
-    puts 'invalid move'
-    puts
-  end
-end
+puts game_flow(game, player1, player2) until game.gameover
+print_game(game.layout)
