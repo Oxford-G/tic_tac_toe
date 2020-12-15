@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength
 require_relative '../lib/board'
 require_relative '../lib/game'
 require_relative '../lib/player'
@@ -38,22 +36,25 @@ def game_flow(game, player1, player2)
 
   return unless game.move_num > 9
 
-  if !game.game_won?
-    puts "It's a draw!"
-    puts
-    puts 'Do you want to play again'
-    puts
-    puts "enter 'Yes' or 'No'"
-    value = gets.chomp
-    if value == 'Yes'
-      puts 'Refresh Terminal to play again!'
-    end
-    game.gameover = true
-    # "Refresh Terminal to play again!"
-  else
-    game.gameover = true
-    " Game Over! It's a draw!"
-  end
+  game.gameover = true
+  " Game Over! It's a draw!"
+
+  # if !game.game_won?
+  #   puts "It's a draw!"
+  #   puts
+  #   puts 'Do you want to play again'
+  #   puts
+  #   puts "enter 'Yes' or 'No'"
+  #   value = gets.chomp
+  #   if value == 'Yes'
+  #     puts
+  #     puts 'Refresh Terminal to play again!'
+  #     game.gameover = true
+  #   else
+  #     game.gameover = true
+  #     " Game Over! It's a draw!"
+  #   end
+  # end
 end
 
 puts "Welcome to Oxfordiho's TIC-TAC-TOE game"
@@ -69,5 +70,3 @@ player2 = Player.new(name, 'o')
 
 puts game_flow(game, player1, player2) until game.gameover
 @board.print_game(game.layout)
-# rubocop:enable Metrics/CyclomaticComplexity
-# rubocop:enable Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength
