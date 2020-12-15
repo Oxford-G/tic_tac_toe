@@ -1,9 +1,4 @@
 class Board
-
-  # def initialize(layout)
-  #   @layout = layout
-  # end
-
   def print_game(layout)
     puts ' 1    2    3'
     puts '-------------'

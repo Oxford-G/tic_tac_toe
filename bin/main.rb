@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Metrics/LineLength
-
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Layout/LineLength
 require_relative '../lib/board'
 require_relative '../lib/game'
 require_relative '../lib/player'
@@ -69,4 +68,4 @@ player2 = Player.new(name, 'o')
 
 puts game_flow(game, player1, player2) until game.gameover
 @board.print_game(game.layout)
-# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Metrics/LineLength
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Layout/LineLength
