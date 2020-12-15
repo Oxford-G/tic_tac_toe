@@ -30,7 +30,7 @@ The game board is, as shown above, a 3x3 grid where each player takes a turn and
 
 There is a draw (or tie) if all cells are occupied without any player meeting the above conditions.
 
-![screenshot](asset/tic-tac-toe-board3.png)
+![screenshot](asset/tic-tac-toe-board4.png)
 
 ## Game Conditions
 
