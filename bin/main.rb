@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
+# rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Metrics/LineLength
+
 require_relative '../lib/board'
 require_relative '../lib/game'
 require_relative '../lib/player'
 
 game = Game.new
-board = Board.new
+@board = Board.new
 name = ''
 
 def print_initial_message(game, player1, player2)
@@ -16,7 +18,7 @@ end
 
 def game_flow(game, player1, player2)
   game.first_d = nil
-  board.print_game(game.layout)
+  @board.print_game(game.layout)
   print_initial_message(game, player1, player2)
   input = gets.chomp
   puts '---------------------------'
@@ -28,6 +30,7 @@ def game_flow(game, player1, player2)
   return 'This square is already filled! Please try again!' unless game.square_filled?
 
   game.play_move
+
   if game.game_won?
     game.gameover = true
     return "#{game.current_player.name} has won the game!"
@@ -35,8 +38,22 @@ def game_flow(game, player1, player2)
 
   return unless game.move_num > 9
 
-  game.gameover = true
-  "Game Over! It's a draw!"
+  if !game.game_won?
+    puts "It's a draw!"
+    puts
+    puts 'Do you want to play again'
+    puts
+    puts "enter 'Yes' or 'No'"
+    value = gets.chomp
+    if value == 'Yes'
+      puts 'Refresh Terminal to play again!'
+    end
+    game.gameover = true
+    # "Refresh Terminal to play again!"
+  else
+    game.gameover = true
+    " Game Over! It's a draw!"
+  end
 end
 
 puts "Welcome to Oxfordiho's TIC-TAC-TOE game"
@@ -51,4 +68,5 @@ name = gets.chomp while name.empty?
 player2 = Player.new(name, 'o')
 
 puts game_flow(game, player1, player2) until game.gameover
-board.print_game(game.layout)
+@board.print_game(game.layout)
+# rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Style/IfUnlessModifier, Metrics/MethodLength, Metrics/LineLength
