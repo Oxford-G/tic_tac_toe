@@ -38,23 +38,6 @@ def game_flow(game, player1, player2)
 
   game.gameover = true
   " Game Over! It's a draw!"
-
-  # if !game.game_won?
-  #   puts "It's a draw!"
-  #   puts
-  #   puts 'Do you want to play again'
-  #   puts
-  #   puts "enter 'Yes' or 'No'"
-  #   value = gets.chomp
-  #   if value == 'Yes'
-  #     puts
-  #     puts 'Refresh Terminal to play again!'
-  #     game.gameover = true
-  #   else
-  #     game.gameover = true
-  #     " Game Over! It's a draw!"
-  #   end
-  # end
 end
 
 puts "Welcome to Oxfordiho's TIC-TAC-TOE game"
